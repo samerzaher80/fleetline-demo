@@ -21,3 +21,5 @@ Support tries `transfer-funds`, a capability absent from its scope. The control 
 Agent operations will resemble site reliability engineering more than chatbot administration. Operators need a live event stream, scoped authority, intervention controls, and replayable reasons. Cost and token use belong beside safety state because resource drift is an operational signal. The control plane should sit between agents and tools, so a paused or killed agent cannot act through another UI path. In two years, the best agent platforms will make rollback, approval queues, fleet health, and audit export ordinary infrastructure. The hard part will be preserving enough reasoning context for oversight without exposing private data or creating false confidence from a polished dashboard.
 
 Built with Codex assistance. All agent work, costs, and events are synthetic, local, and reset on reload. No external systems, real customers, payments, or production authority.
+
+Replay displays agent and approval-queue state captured at each event. A later pause, resume, or kill leaves earlier snapshots intact. Viewing history does not rerun actions.

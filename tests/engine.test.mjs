@@ -6,3 +6,9 @@ test('kill denies pending actions',()=>{let p=createPlane();for(let i=0;i<5;i++)
 test('approval requires running agent',()=>{let p=createPlane();for(let i=0;i<5;i++)p=step(p);p=approve(p,p.queue[0].id,true);assert.equal(p.queue[0].status,'approved')});
 test('rogue scope attempt is contained and paused',()=>{const p=rogue(createPlane());assert.equal(p.agents.find(x=>x.id==='support').status,'paused');assert.equal(p.events[0].type,'containment')});
 test('replay remains agent scoped',()=>{let p=step(createPlane());assert.ok(replay(p,'billing').every(x=>x.agent==='billing'))});
+
+test('replay preserves the state before and after a kill', async () => {
+  const {createPlane,step,pause,kill,replay} = await import('../engine.js');
+  const state = kill(pause(step(createPlane()),'dispatch'),'dispatch');
+  assert.deepEqual(replay(state,'dispatch').map(e=>e.state.agent.status),['killed','paused','running']);
+});
